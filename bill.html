@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>Admin Panel</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body class="colBg" onload="loadCustomer('http://localhost:8080/ElectroGrid/rest/customers')">
+    <div class="sidebar">
+        <div class="column left" id="includedContent">
+
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="topic">
+            <h2>Bill Details</h2>
+        </div>
+        <div class="wrapper mt-lg-3">
+            <div class="formContainer"> 
+                <form action="http://localhost:8080/ElectroGrid/rest/bills" method="POST"  id="submitForm">
+
+                    <div class="row centerCont">
+                        <div class="col col-lg-6 col-md-10 col-xs-11">
+                            <div class="row centerCont">
+                                <div class="col col-lg-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Units</label>
+                                </div>
+                                <div class="col col-lg-7">
+                                    <input type="text" class="form-control" name="units" required id="exampleFormControlInput1" placeholder="" pattern="^([0-9]{5}$"  title="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col col-lg-6 col-md-10 col-xs-11">
+                            <div class="row centerCont">
+                                <div class="col col-lg-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Tax</label>
+                                </div>
+                                <div class="col col-lg-7">
+                                    <input type="text" class="form-control" name="tax" required id="exampleFormControlInput1" placeholder="" pattern="^([0-9]{5}$">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row centerCont">
+                        <div class="col col-lg-6 col-md-10 col-xs-11">
+                            <div class="row centerCont">
+                                <div class="col col-lg-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Bill Number</label>
+                                </div>
+                                <div class="col col-lg-7">
+                                    <input type="text" class="form-control" name="billnumber" pattern="" title="Format Should be +94766344989" required id="exampleFormControlInput1" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col col-lg-6 col-md-10 col-xs-11">
+                            <div class="row centerCont">                           
+                                <div class="col col-lg-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Amount</label>
+                                </div>
+                                <div class="col col-lg-7">
+                                    <input type="text" class="form-control" name="amount" pattern="" title="Format Should be +94766344989" required id="exampleFormControlInput1" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row centerCont">
+                        <div class="col col-lg-6 col-md-10 col-xs-11">
+                            <div class="row centerCont">
+                                <div class="col col-lg-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Customer ID</label>
+                                </div>
+                                <div class="col col-lg-7">
+                                    <input type="text" class="form-control" name="customerid" pattern="" title="Format Should be +94766344989" required id="exampleFormControlInput1" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col col-lg-6 col-md-10 col-xs-11">
+                            <div class="row centerCont">
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row centerCont">
+                        
+                        <div class="row centerCont">
+                            <div class="d-grid gap-2 col-2 mx-auto pt-3">
+                                <button class="btn btnSubmit btn-sm">Add New Bill</button>
+                            </div>
+
+                            
+                        </div>
+                    </div>
+            </div>
+            </form>
+        </div>
+
+        <div class="tblContainer">
+            <div class="row centerCont">
+                <div class="col col-lg-11 col-md-10 col-xs-11">
+                    <table class="table table-primary table-hover table-responsive">
+                        <thead>
+                            <tr class=" table-primary">
+                                <th scope="col">Units</th>
+                                <th scope="col">Tax</th>
+                                <th scope="col">Bill ID</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Customer ID</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        $(function() {
+            $("#includedContent").load("nav.html");
+        });
+    </script>
+    <!-- // INCLUDE THIS -->
+</body>
+
+<script src="js/customer.js"></script> 
+
+</html>
